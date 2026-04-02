@@ -78,6 +78,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-      - name: Restore dev config (cleanup)
+      - name: Restore workspace files (cleanup)
         if: always()
-        run: ./scripts/restore-dev-config.sh
+        run: |
+          git checkout -- pnpm-workspace.yaml .npmrc meet-ce/frontend/package.json meet-ce/frontend/projects/shared-meet-components/package.json || true
